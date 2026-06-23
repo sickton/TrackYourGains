@@ -1,11 +1,13 @@
 package com.TrackYourGains.tracker.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
 @Data
 @Table(name = "Users")
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     /** ID of the user */

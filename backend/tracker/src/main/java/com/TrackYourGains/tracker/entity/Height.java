@@ -15,6 +15,6 @@ public class Height {
     private int feet;
 
     /** Height in inches */
-    @Column(name = "heaight_inches")
+    @Column(name = "height_inches")
     private int  inches;
 }
