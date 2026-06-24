@@ -67,9 +67,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        if(user.isEmpty())
-            throw new RuntimeException("User not found!");
-        else
+        if (user.isPresent()) {
             return UserMapper.mapToUserDto(user.get());
+        } else {
+            return null;
+        }
     }
 }
