@@ -5,6 +5,11 @@ import com.TrackYourGains.tracker.entity.User;
 
 public class UserMapper {
 
+    /**
+     * Maps the user dto to an actual user object
+     * @param userDto details of user
+     * @return wrapped user object
+     */
     public static User mapToUser(UserDto userDto)
     {
         User u = new User();
@@ -15,6 +20,11 @@ public class UserMapper {
         return u;
     }
 
+    /**
+     * Maps the user object to a userDto
+     * @param user details of the user
+     * @return wrapped userDto object
+     */
     public static UserDto mapToUserDto(User user)
     {
         UserDto dto = new UserDto();
