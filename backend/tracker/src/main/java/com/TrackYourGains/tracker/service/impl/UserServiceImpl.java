@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto updateUser(Long id, UserDto userDto) {
         Optional<User> user = userRepository.findById(id);
-        if(!user.isPresent())
+        if(user.isEmpty())
             throw new RuntimeException("User not found!");
         else
         {
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        if(!user.isPresent())
+        if(user.isEmpty())
             throw new RuntimeException("User not found!");
         else
             return UserMapper.mapToUserDto(user.get());
