@@ -40,8 +40,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto)
     {
-        if(!userRepository.existsByFirstNameAndLastName(userDto.getFirstName(), userDto.getLastName()))
-            return new ResponseEntity("User does not exist", HttpStatus.BAD_REQUEST);
+        if(userRepository.existsByFirstNameAndLastName(userDto.getFirstName(), userDto.getLastName()))
+            return new ResponseEntity("User already exists", HttpStatus.BAD_REQUEST);
         UserDto user = userService.addUser(userDto);
         return ResponseEntity.ok(user);
     }
