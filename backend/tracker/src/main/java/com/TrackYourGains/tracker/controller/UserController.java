@@ -1,8 +1,11 @@
 package com.TrackYourGains.tracker.controller;
 
 import com.TrackYourGains.tracker.dto.UserDto;
+import com.TrackYourGains.tracker.dto.WeightLogDto;
 import com.TrackYourGains.tracker.repository.UserRepository;
+import com.TrackYourGains.tracker.repository.WeightLogRepository;
 import com.TrackYourGains.tracker.service.UserService;
+import com.TrackYourGains.tracker.service.WeightLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private WeightLogService weightLogService;
+
+    @Autowired
+    private WeightLogRepository weightLogRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -43,6 +52,9 @@ public class UserController {
         if(userRepository.existsByFirstNameAndLastName(userDto.getFirstName(), userDto.getLastName()))
             return new ResponseEntity("User already exists", HttpStatus.BAD_REQUEST);
         UserDto user = userService.addUser(userDto);
+        WeightLogDto request = new WeightLogDto();
+        request.setWeight(user.getWeight());
+        weightLogService.logWeight(user.getId(), request);
         return ResponseEntity.ok(user);
     }
 
@@ -58,6 +70,9 @@ public class UserController {
         if(!userRepository.existsById(id))
             return new ResponseEntity("User does not exist", HttpStatus.BAD_REQUEST);
         UserDto user = userService.updateUser(id, userDto);
+        WeightLogDto request = new WeightLogDto();
+        request.setWeight(user.getWeight());
+        weightLogService.logWeight(user.getId(), request);
         return ResponseEntity.ok(user);
     }
 
