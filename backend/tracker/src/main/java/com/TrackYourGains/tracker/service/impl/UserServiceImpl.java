@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(Long id, UserDto userDto) {
         Optional<User> user = userRepository.findById(id);
         if(user.isEmpty())
-            throw new RuntimeException("User not found!");
+            return null;
         else
         {
             User u = user.get();
