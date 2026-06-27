@@ -54,6 +54,7 @@ public class UserController {
         UserDto user = userService.addUser(userDto);
         WeightLogDto request = new WeightLogDto();
         request.setWeight(user.getWeight());
+        request.setMessage("User created account");
         weightLogService.logWeight(user.getId(), request);
         return ResponseEntity.ok(user);
     }
@@ -72,6 +73,7 @@ public class UserController {
         UserDto user = userService.updateUser(id, userDto);
         WeightLogDto request = new WeightLogDto();
         request.setWeight(user.getWeight());
+        request.setMessage("User updated personal details");
         weightLogService.logWeight(user.getId(), request);
         return ResponseEntity.ok(user);
     }
