@@ -40,6 +40,10 @@ public class WeightLogController {
         weightLogDto.setUserId(id);
         weightLogDto.setWeight(request);
         weightLogDto.setMessage("User updated their weight!");
-        return ResponseEntity.ok(weightLogService.logWeight(id, weightLogDto));
+        WeightLogDto response = weightLogService.logWeight(id, weightLogDto);
+        if(response != null)
+            return ResponseEntity.ok(response);
+        else
+            return new ResponseEntity("User does not exist!", HttpStatus.NOT_FOUND);
     }
 }

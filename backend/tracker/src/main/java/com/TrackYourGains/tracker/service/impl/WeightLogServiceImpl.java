@@ -22,6 +22,8 @@ public class WeightLogServiceImpl implements WeightLogService {
 
     @Override
     public WeightLogDto logWeight(Long userId, WeightLogDto request) {
+        if(userRepository.findById(userId).isEmpty())
+            return null;
         WeightLog weightLog = WeightLogMapper.mapToWeightLog(request, userRepository.findById(userId).get());
         weightLog.setDate(LocalDate.now());
         return WeightLogMapper.mapToWeightLogDto(weightLogRepository.save(weightLog));
