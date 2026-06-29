@@ -22,4 +22,13 @@ public class WorkoutSet {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workout_log_id")
     private WorkoutLog workoutLog;
+
+    @Column(name = "set_number")
+    private int setNumber;
+
+    @Column(name = "repetitions")
+    private int reps;
+
+    @Column(name = "weight")
+    private double weight;
 }
